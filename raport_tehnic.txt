@@ -1,0 +1,149 @@
+RAPORT TEHNIC DIGITAL
+Proiect: Chat AI în terminal cu Cloudflare Workers AI
+Data: 3 noiembrie 2026
+
+1. SCOP ȘI REZUMAT
+
+Proiectul este o aplicație de conversație în terminal care trimite mesaje către
+modelul @cf/meta/llama-3.1-8b-instruct prin API-ul Cloudflare Workers AI.
+Configurația și apelul API se află în configurare.py, interfața de conversație
+în principal.py, iar testele automate în test_configurare.py. Tranzacțiile și
+erorile sunt adăugate în jurnal.txt.
+
+Verificarea codului și testele automate sunt funcționale: 10 teste au trecut,
+fără apeluri API reale. Jurnalul existent conține atât execuții reușite, cât și
+erori istorice și nu identifică furnizorul fiecărei înregistrări. Prin urmare,
+nu este suficient, singur, pentru a demonstra starea unei conexiuni Cloudflare
+la un anumit moment.
+
+2. STRUCTURA PROIECTULUI ȘI SECURITATE (CERINȚELE EXERCIȚIILOR 3 ȘI 4)
+
+Structura observată în directorul proiectului:
+
+lab5/
+|-- .env
+|-- .gitignore
+|-- .vscode/
+|   `-- settings.json
+|-- configurare.py
+|-- jurnal.txt
+|-- laborator5.pdf
+|-- principal.py
+`-- test_configurare.py
+
+Fișierul .env este prezent. Regula .env din .gitignore cere ignorarea lui de
+către Git, dar directorul de lucru nu este un depozit Git; includerea efectivă
+în Git nu a putut fi verificată. Nu afișați și nu includeți valoarea tokenului
+în capturi sau în raportul predat.
+
+Aplicația citește CLOUDFLARE_ACCOUNT_ID și CLOUDFLARE_API_TOKEN din mediul
+procesului. Codul nu încarcă automat .env. Tokenul este transmis în antetul
+Authorization și nu este scris intenționat în jurnal.
+
+DOVADĂ VIZUALĂ 1 - DE REALIZAT ÎN VISUAL STUDIO CODE:
+- Deschideți directorul lab5 în Explorer.
+- Faceți vizibile intrările .env și .gitignore, împreună cu fișierele Python.
+- Captura trebuie să arate regula .env din .gitignore, dar să nu dezvăluie
+  conținutul fișierului .env.
+- Nu se poate atesta din această verificare dacă fișierul .env este ignorat de
+  Git, deoarece directorul nu este depozit Git.
+
+3. VERIFICARE DEFENSIVĂ (CERINȚA EXERCIȚIULUI 7)
+
+Codul verifică înaintea apelului API existența ambelor valori de configurare:
+- dacă lipsește CLOUDFLARE_ACCOUNT_ID, ridică ValueError;
+- dacă lipsește CLOUDFLARE_API_TOKEN, ridică ValueError.
+
+În ambele cazuri, cererea API nu este trimisă, iar eroarea este înregistrată.
+Testele automate verifică separat scenariile cu fiecare variabilă lipsă.
+
+Adaptare importantă: cerința formulată pentru laborator vorbește despre o
+parolă, dar proiectul nu folosește o parolă de aplicație. Autentificarea curentă
+este realizată printr-un API token Cloudflare și un Account ID. Nu prezentați
+tokenul API ca fiind o parolă.
+
+DOVADĂ VIZUALĂ 2 - DE REALIZAT:
+- Deschideți configurare.py în Visual Studio Code.
+- Capturați verificările pentru CLOUDFLARE_ACCOUNT_ID și
+  CLOUDFLARE_API_TOKEN și ramura care oprește cererea dacă valorile lipsesc.
+- Nu includeți valori reale ale variabilelor.
+
+4. EXECUȚIA APLICAȚIEI DEMONSTRATIVE (CERINȚA EXERCIȚIULUI 9)
+
+Tema demonstrată de proiectul actual este un asistent conversațional în
+terminal, folosind modelul Cloudflare Workers AI
+@cf/meta/llama-3.1-8b-instruct. principal.py oferă prompturi pentru utilizator
+și AI, păstrează istoricul conversației în memorie și include comenzile /help,
+/clear și /exit.
+
+Pornire:
+    python3 principal.py
+
+Pentru demonstrație este necesară configurarea prealabilă în terminal a
+variabilelor CLOUDFLARE_ACCOUNT_ID și CLOUDFLARE_API_TOKEN, fără afișarea
+tokenului. Introduceți o întrebare relevantă temei proiectului și păstrați
+captura numai dacă se vede un răspuns real al modelului, nu un răspuns simulat.
+
+DOVADĂ VIZUALĂ 3 - DE REALIZAT:
+- Capturați fereastra terminalului cu antetul/modelul, întrebarea introdusă și
+  răspunsul primit.
+- Captura nu trebuie să conțină tokenuri sau alte date confidențiale.
+- Nu a fost făcut un apel API în cadrul verificării acestui raport; captura
+  trebuie realizată în timpul unei execuții reale de către student.
+
+5. JURNALUL TEHNIC (CERINȚA EXERCIȚIULUI FINAL)
+
+jurnal.txt este un fișier text persistent, deschis în mod append. Codul
+înregistrează prompturile, răspunsurile și erorile apelului API. Tokenul
+Cloudflare nu este destinat jurnalizării; mesajele de eroare sunt limitate și
+tokenul este mascat înainte de scriere.
+
+La verificare, jurnalul conținea 16 înregistrări de prompt, 8 înregistrări de
+răspuns și 8 înregistrări de eroare. Acesta este un jurnal cumulativ, care
+include și încercări istorice cu alți furnizori. Mesajele nu includ o
+etichetă a furnizorului, deci numerele nu demonstrează că toate răspunsurile
+au fost obținute prin Cloudflare.
+
+Neconcordanță față de cerința inițială: cerința solicită starea conexiunii cu
+platforma Google, însă proiectul curent a fost mutat la Cloudflare Workers AI.
+Codul și jurnalul nu verifică și nu atestă o conexiune Google. Pentru raportul
+proiectului curent, dovada trebuie să prezinte tranzacția Cloudflare. Dacă
+evaluarea cere obligatoriu Google, este necesară o versiune separată a
+integrării Google și o execuție verificată cu aceasta.
+
+DOVADĂ VIZUALĂ 4 - DE REALIZAT:
+- Deschideți jurnal.txt și capturați promptul, răspunsul și, dacă apare, starea
+  sau eroarea ultimei execuții reale Cloudflare.
+- Folosiți o întrebare neconfidențială și verificați că răspunsul corespunde
+  ultimei rulări.
+- Nu prezentați intrări vechi drept dovadă a unei conexiuni curente și nu
+  pretindeți că jurnalul confirmă Google.
+
+6. TESTARE AUTOMATĂ
+
+Comandă:
+    python3 -m unittest -v test_configurare
+
+Rezultat verificat la 3 noiembrie 2026: 10 teste reușite. Testele folosesc
+răspunsuri HTTP simulate și verifică formarea cererii, configurarea lipsă,
+erorile API, jurnalizarea fără secrete, istoricul conversației și comenzile
+interfeței terminal. Niciun test nu consumă credite Cloudflare.
+
+Comanda de compilare:
+    python3 -m py_compile configurare.py principal.py test_configurare.py
+
+Rezultat: fișierele s-au compilat fără erori.
+
+7. CONCLUZIE ȘI LISTĂ DE VERIFICARE PENTRU PREDARE
+
+Proiectul funcțional curent este conectat prin cod la Cloudflare Workers AI,
+nu la Google. Verificarea defensivă este pentru API token și Account ID, nu
+pentru parolă. Testele automate trec, însă capturile vizuale cerute nu sunt
+incluse în acest document și trebuie realizate în Visual Studio Code/terminal.
+
+[ ] Captură Explorer cu .env și .gitignore vizibile, fără valori secrete.
+[ ] Captură cod cu verificările defensive pentru token și Account ID.
+[ ] Captură a unei interogări reale și a răspunsului Cloudflare.
+[ ] Captură a jurnalului aferent acelei execuții reale.
+[ ] Confirmarea cu cadrul didactic dacă furnizorul Cloudflare este acceptat în
+    locul cerinței explicite despre Google.

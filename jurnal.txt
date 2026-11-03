@@ -1,0 +1,32 @@
+2026-11-03 10:20:52,653 INFO Prompt: salut
+2026-11-03 10:20:52,655 ERROR Apelul API a eșuat (ValueError).
+2026-11-03 10:22:50,072 INFO Prompt: salut
+2026-11-03 10:22:50,079 ERROR Apelul API a eșuat (ValueError).
+2026-11-03 10:23:48,095 INFO Prompt: salut
+2026-11-03 10:23:48,143 ERROR Apelul API a eșuat (AttributeError).
+2026-11-03 10:25:30,622 INFO Prompt: salut
+2026-11-03 10:25:31,162 ERROR Apelul API a eșuat (ClientError).
+2026-11-03 10:26:54,529 INFO Prompt: salut
+2026-11-03 10:26:54,982 ERROR Apelul API a eșuat (ClientError): code=403; status=PERMISSION_DENIED; message=The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable..
+2026-11-03 10:29:17,068 INFO Prompt: salut
+2026-11-03 10:29:17,462 ERROR Apelul API a eșuat (ClientError): code=403; status=PERMISSION_DENIED; message=The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable..
+2026-11-03 10:36:08,743 INFO Prompt: salut
+2026-11-03 10:36:09,023 ERROR Apelul API a eșuat (GrokAPIError): code=400; status=HTTP_ERROR; message=Bad Request.
+2026-11-03 10:37:27,486 INFO Prompt: salut
+2026-11-03 10:37:27,773 ERROR Apelul API a eșuat (GrokAPIError): code=400; status=HTTP_ERROR; message=Incorrect API key provided. You can obtain an API key from https://console.x.ai..
+2026-11-03 10:43:24,463 INFO Prompt: salut
+2026-11-03 10:43:24,785 INFO Răspuns: Salut ! Comment ça va ?
+2026-11-03 10:43:56,533 INFO Prompt: buna
+2026-11-03 10:43:56,939 INFO Răspuns: Ce putin de vreme frumos! Ce ne faci azi?
+2026-11-03 10:46:46,395 INFO Prompt: salut
+2026-11-03 10:46:46,963 INFO Răspuns: Salut ! Comment ça va ?
+2026-11-03 10:46:49,991 INFO Prompt: sunt roman
+2026-11-03 10:46:50,810 INFO Răspuns: Salut ! Sunt bucuros să vorbesc cu tine în română. Cum te simți azi ?
+2026-11-03 10:47:00,242 INFO Prompt: nu te fute grija
+2026-11-03 10:47:00,805 INFO Răspuns: Îmi place stilul tău de a vorbi. Nu mă îngrijorez, dar îmi place să discut cu tine. Ce vrei să vorbim despre?
+2026-11-03 10:51:32,052 INFO Prompt: salutari
+2026-11-03 10:51:32,607 INFO Răspuns: Salutari! Ce pot face pentru a vă ajuta?
+2026-11-03 11:06:52,706 INFO Prompt: salutari!
+2026-11-03 11:06:53,687 INFO Răspuns: Salutari! Ce putem face astăzi?
+2026-11-03 11:07:00,264 INFO Prompt: cum te simti?
+2026-11-03 11:07:01,123 INFO Răspuns: Sunt un program de inteligență artificială, așa că nu am sentimente sau emoții ca oamenii. Însă sunt pregătit să vă ajut cu orice întrebare sau subiect pe care doriți să-l discutați!
